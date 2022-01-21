@@ -1,0 +1,16 @@
+Check that Java is installed. 
+
+Open command line
+
+Type java -version into your command line. If java is installed, you will see a message stating what version of Java is currently installed.
+If not, you may need to install the Java Development Kit from their website. It is free and can be found at this link: http://www.oracle.com/technetwork/java/javase/downloads/index.html
+
+https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A
+
+Once your java environment is setup.
+
+You can compile the Java files
+1. On the commamd line type  compileClasses.cmd
+2.Once above successful, commamd line change directory to classes folder (cd classes). type createJar.cmd
+3.Once jar is created,  Next is to run runJar.cmd
+4. File name expected can type ..\Games.txt
