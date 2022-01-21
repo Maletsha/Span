@@ -28,11 +28,15 @@ public class League {
 
     private HashMap<String, Integer> processFile(String fileName) {
         List<Match> matches = league.readGamesFile(fileName);
-        HashMap<String, Integer> teams = league.leaguePoints(matches);
-        HashMap<String, Integer> teamsSorted = teams.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
-                        LinkedHashMap::new));
+        HashMap<String, Integer> teamsSorted = new HashMap<>();
+        if(matches != null || !matches.isEmpty()){
+            HashMap<String, Integer> teams = league.leaguePoints(matches);
+            teamsSorted = teams.entrySet().stream()
+                    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                    .collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
+                            LinkedHashMap::new));
+        }
+
         return teamsSorted;
     }
 
@@ -135,15 +139,16 @@ public class League {
                     if(splitTeams.length == 2){
                         match.add(processData(splitTeams[0],splitTeams[1]));
                     }else {
-                        System.out.println("File only needs to have 2 teams per line");
-                        match = null;
+                        System.out.println("File Error :" +
+                                "File only needs to have 2 teams per line");
+                        match = new ArrayList<>();
                         break;
                     }
                 }
                 scanner.close();
             }
         }catch (FileNotFoundException e){
-            System.out.println("File not found.");
+            System.out.println("File error :"+e.getMessage() );
         }
         return match;
     }
